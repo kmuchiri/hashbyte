@@ -1,0 +1,46 @@
+project_name: hashbyte
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    main: ./main.go
+
+archives:
+  - format: tar.gz
+    # This naming template matches what we expect in install.sh
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+
+# Optional: Automatically create a Homebrew tap
+# To use this, you need to create an empty repository at kmuchiri/homebrew-hashbyte
+brews:
+  - repository:
+      owner: kmuchiri
+      name: homebrew-hashbyte
+    description: "Activation Byte Recovery Tool"
+    homepage: "https://github.com/kmuchiri/hashbyte"
+
+checksum:
+  name_template: 'checksums.txt'
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
