@@ -9,7 +9,7 @@ import (
 	"hashbyte/rainbow"
 )
 
-//go:embed tables.bin
+//go:embed rainbow/tables.bin
 var embeddedTables []byte
 
 const usage = `Activation Byte Recovery Tool
@@ -29,9 +29,9 @@ Rainbow Subcommands:
 
 Examples:
   %s brute-force 999a6ab85e8d1d...  
-  %s rainbow generate tables.bin
+  %s rainbow generate rainbow/tables.bin
   %s rainbow lookup 999a6ab85e8d1d... (uses embedded tables)
-  %s rainbow lookup -v my_tables.bin 999a6ab85e8d1d... (uses my_tables.bin)
+  %s rainbow lookup -v rainbow/tables.bin 999a6ab85e8d1d... (uses rainbow/tables.bin)
 `
 
 func printUsage() {
