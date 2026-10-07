@@ -3,14 +3,13 @@ package rainbow
 import (
 	"encoding/binary"
 	"fmt"
+	"hashbyte/hash"
 	"math/rand"
 	"os"
 	"runtime"
 	"sort"
 	"sync"
 	"time"
-
-	"hashbyte/hash"
 )
 
 // Table Parameters
