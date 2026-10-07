@@ -3,13 +3,14 @@ package rainbow
 import (
 	"encoding/binary"
 	"fmt"
-	"hashbyte/hash"
 	"math/rand"
 	"os"
 	"runtime"
 	"sort"
 	"sync"
 	"time"
+
+	"hashbyte/hash"
 )
 
 // Table Parameters
@@ -53,7 +54,7 @@ func Generate(filename string) {
 	}
 	defer file.Close()
 
-	for t := range NumTables {
+	for t := 0; t < NumTables; t++ {
 		tableStartTime := time.Now()
 		chains := make([]Chain, ChainCount)
 
@@ -61,7 +62,7 @@ func Generate(filename string) {
 		numWorkers := runtime.NumCPU()
 		chunkSize := ChainCount / numWorkers
 
-		for w := range numWorkers {
+		for w := 0; w < numWorkers; w++ {
 			wg.Add(1)
 			go func(workerID int) {
 				defer wg.Done()
