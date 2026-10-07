@@ -1,2 +1,57 @@
-# hashbyte
-Standalone Go implementation of  'tables'.
+# HashByte
+
+An Activation Byte Recovery Tool implemented in Go. This tool exhaustively searches the 2^32 keyspace to find the 4-byte activation bytes matching a given SHA-1 hash. It supports both pure brute-force searches and lightning-fast lookups using pre-computed rainbow tables.
+
+## Installation
+
+### Method 1: Using the Install Script (Linux & macOS)
+You can quickly install the latest pre-compiled binary via our install script:
+```bash
+curl -sSL https://raw.githubusercontent.com/kmuchiri/hashbyte/main/install.sh | sudo bash
+```
+
+### Method 2: Build from Source
+Ensure you have [Go](https://go.dev/) installed.
+```bash
+git clone https://github.com/kmuchiri/hashbyte.git
+cd hashbyte
+go build -o hashbyte main.go
+sudo mv hashbyte /usr/local/bin/
+```
+*(Note: The rainbow tables are embedded into the binary using `//go:embed`, meaning the resulting executable is fully standalone and can be moved anywhere on your system.)*
+
+## Usage
+
+### 1. Brute-Force Mode
+Search the full 2^32 keyspace without relying on rainbow tables. This will utilize all available CPU cores.
+
+```bash
+hashbyte brute-force <sha1_hash>
+```
+*Example:* `hashbyte brute-force 05768689284d85b1abe78176134439220f87c209`
+
+### 2. Rainbow Table Lookup
+Look up a hash instantly using the pre-computed rainbow tables embedded directly within the executable.
+
+```bash
+hashbyte rainbow lookup <sha1_hash>
+```
+
+#### Verbose Output
+By default, `lookup` only prints the resulting activation bytes in lowercase hex. If you want detailed metrics (like table used, step, and elapsed time), use the `-v` or `--verbose` flag:
+```bash
+hashbyte rainbow lookup -v <sha1_hash>
+```
+
+#### Using External Tables
+If you generated a custom rainbow table file and want to use it instead of the embedded ones, simply provide the path before the hash:
+```bash
+hashbyte rainbow lookup [table_file] <sha1_hash>
+```
+*Example:* `hashbyte rainbow lookup -v my_tables.bin 05768689284d85b1abe78176134439220f87c209`
+
+### 3. Generate New Tables
+You can build your own rainbow tables and save them to a binary file:
+```bash
+hashbyte rainbow generate <output_file>
+```
