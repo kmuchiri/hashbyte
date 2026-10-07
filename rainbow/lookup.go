@@ -124,7 +124,6 @@ func RunLookupAndPrint(filename string, targetHashHex string) {
 	PrintLookupResult(res)
 }
 
-// RunLookup runs the lookup and prints only the hex activation bytes if found.
 func RunLookup(filename string, targetHashHex string) {
 	res, err := Lookup(filename, targetHashHex)
 	if err != nil {
