@@ -26,14 +26,6 @@ archives:
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
 
-# Optional: Automatically create a Homebrew tap
-# To use this, you need to create an empty repository at kmuchiri/homebrew-hashbyte
-brews:
-  - repository:
-      owner: kmuchiri
-      name: homebrew-hashbyte
-    description: "Activation Byte Recovery Tool"
-    homepage: "https://github.com/kmuchiri/hashbyte"
 
 checksum:
   name_template: 'checksums.txt'

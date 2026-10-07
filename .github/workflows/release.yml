@@ -31,8 +31,3 @@ jobs:
         env:
           # This token is provided automatically by GitHub Actions to create the release.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-          # If you want to use the Homebrew tap feature, uncomment the line below 
-          # and comment out the line above. You will need to create a Personal Access Token 
-          # with 'repo' scope and save it as a repository secret named HOMEBREW_TAP_TOKEN.
-          # GITHUB_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
