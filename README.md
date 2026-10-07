@@ -1,6 +1,6 @@
 # HashByte
 
-An Activation Byte Recovery Tool implemented in Go. This tool exhaustively searches the 2^32 keyspace to find the 4-byte activation bytes matching a given SHA-1 hash. It supports both pure brute-force searches and lightning-fast lookups using pre-computed rainbow tables.
+An Activation Byte Recovery Tool implemented in Go. 
 
 ## Installation
 
@@ -10,7 +10,14 @@ You can quickly install the latest pre-compiled binary via our install script:
 curl -sSL https://raw.githubusercontent.com/kmuchiri/hashbyte/main/install.sh | sudo bash
 ```
 
-### Method 2: Build from Source
+### Method 2: Using the Install Script (Windows)
+For Windows users, open PowerShell and run:
+```powershell
+Invoke-Expression (Invoke-RestMethod -Uri "https://raw.githubusercontent.com/kmuchiri/hashbyte/main/install.ps1")
+```
+This script downloads the binary, places it in your local AppData folder, and automatically adds it to your system PATH.
+
+### Method 3: Build from Source
 Ensure you have [Go](https://go.dev/) installed.
 ```bash
 git clone https://github.com/kmuchiri/hashbyte.git
