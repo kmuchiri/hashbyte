@@ -19,9 +19,8 @@ type LookupResult struct {
 	TimeTaken       time.Duration
 }
 
-// Lookup loads pre-generated rainbow tables from disk and searches for
-// the 4-byte activation bytes that produce the given SHA-1 hash.
-func Lookup(filename string, targetHashHex string) (*LookupResult, error) {
+// Lookup searches for the 4-byte activation bytes that produce the given SHA-1 hash.
+func Lookup(fileData []byte, targetHashHex string) (*LookupResult, error) {
 	targetHashBytes, err := hex.DecodeString(targetHashHex)
 	if err != nil || len(targetHashBytes) != 20 {
 		return nil, fmt.Errorf("invalid SHA1 checksum provided. Must be 40 hex characters (20 bytes)")
@@ -29,12 +28,12 @@ func Lookup(filename string, targetHashHex string) (*LookupResult, error) {
 	var targetHash [20]byte
 	copy(targetHash[:], targetHashBytes)
 
-	fileData, err := os.ReadFile(filename)
-	if err != nil {
-		return nil, fmt.Errorf("error reading file: %w", err)
+	tableSize := ChainCount * 8
+	expectedSize := NumTables * tableSize
+	if len(fileData) < expectedSize {
+		return nil, fmt.Errorf("invalid table data size: expected at least %d bytes, got %d. Did you generate the tables?", expectedSize, len(fileData))
 	}
 
-	tableSize := ChainCount * 8
 	var tables [][]Chain
 	for t := 0; t < NumTables; t++ {
 		tableBytes := fileData[t*tableSize : (t+1)*tableSize]
@@ -113,10 +112,9 @@ func HexOnly(res *LookupResult) {
 }
 
 // RunLookupAndPrint runs the lookup and prints the result.
-func RunLookupAndPrint(filename string, targetHashHex string) {
-	fmt.Printf("Loading tables from %s...\n", filename)
+func RunLookupAndPrint(fileData []byte, targetHashHex string) {
 	fmt.Printf("Starting lookup for hash %s...\n", targetHashHex)
-	res, err := Lookup(filename, targetHashHex)
+	res, err := Lookup(fileData, targetHashHex)
 	if err != nil {
 		fmt.Println("Error:", err)
 		os.Exit(1)
@@ -124,8 +122,8 @@ func RunLookupAndPrint(filename string, targetHashHex string) {
 	PrintLookupResult(res)
 }
 
-func RunLookup(filename string, targetHashHex string) {
-	res, err := Lookup(filename, targetHashHex)
+func RunLookup(fileData []byte, targetHashHex string) {
+	res, err := Lookup(fileData, targetHashHex)
 	if err != nil {
 		fmt.Println("Error:", err)
 		os.Exit(1)
