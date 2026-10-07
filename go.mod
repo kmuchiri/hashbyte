@@ -1,3 +1,3 @@
-module github.com/kmuchiri/hashbyte
+module hashbyte
 
 go 1.27.1
