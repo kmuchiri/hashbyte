@@ -95,7 +95,7 @@ func PrintLookupResult(res *LookupResult) {
 	if res.Found {
 		fmt.Printf("\nSUCCESS!\n")
 		fmt.Printf("Found in Table %d, Step %d\n", res.Table, res.Step)
-		fmt.Printf("Activation Bytes: hex:%08X\n", res.ActivationBytes)
+		fmt.Printf("Activation Bytes: hex:%08x\n", res.ActivationBytes)
 		fmt.Printf("Time taken: %v\n", res.TimeTaken)
 	} else {
 		fmt.Printf("Hash not found in rainbow tables (Time: %v).\n", res.TimeTaken)
@@ -105,7 +105,7 @@ func PrintLookupResult(res *LookupResult) {
 // HexOnly prints the activation bytes in hex format if found, otherwise prints an empty string.
 func HexOnly(res *LookupResult) {
 	if res.Found {
-		fmt.Printf("%08X\n", res.ActivationBytes)
+		fmt.Printf("%08x\n", res.ActivationBytes)
 	} else {
 		fmt.Printf("")
 	}
