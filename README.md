@@ -62,3 +62,19 @@ You can build your own rainbow tables and save them to a binary file:
 ```bash
 hashbyte rainbow generate <output_file>
 ```
+
+## Uninstallation
+
+Because `hashbyte` is a single standalone executable, uninstalling it is as simple as deleting the file.
+
+**Linux & macOS:**
+```bash
+sudo rm /usr/local/bin/hashbyte
+```
+
+**Windows:**
+Open PowerShell and remove the installation directory:
+```powershell
+Remove-Item -Recurse -Force $env:LOCALAPPDATA\hashbyte
+```
+*(You can also safely remove the folder from your system PATH via the Windows Environment Variables menu).*
