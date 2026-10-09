@@ -9,7 +9,7 @@ func TestFindHash(t *testing.T) {
 	targetHashHex := "05768689284d85b1abe78176134439220f87c209"
 	targetHash, _ := hex.DecodeString(targetHashHex)
 	match, _, found := findHash(targetHash)
-	
+
 	if !found {
 		t.Errorf("expected to find match")
 	}
