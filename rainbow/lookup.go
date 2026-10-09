@@ -4,10 +4,11 @@ import (
 	"encoding/binary"
 	"encoding/hex"
 	"fmt"
-	"github.com/kmuchiri/hashbyte/hash"
 	"os"
 	"sort"
 	"time"
+
+	"github.com/kmuchiri/hashbyte/hash"
 )
 
 // LookupResult holds the result of a rainbow table lookup.
@@ -122,6 +123,7 @@ func RunLookupAndPrint(fileData []byte, targetHashHex string) {
 	PrintLookupResult(res)
 }
 
+// RunLookup runs the lookup and prints only the activation bytes in hex format if found, otherwise prints an empty string.
 func RunLookup(fileData []byte, targetHashHex string) {
 	res, err := Lookup(fileData, targetHashHex)
 	if err != nil {
@@ -129,4 +131,18 @@ func RunLookup(fileData []byte, targetHashHex string) {
 		os.Exit(1)
 	}
 	HexOnly(res)
+}
+
+// RunLookupAndReturnHex runs the lookup and returns the activation bytes in hex format if found, otherwise returns an empty string.
+func RunLookupAndReturnHex(fileData []byte, targetHashHex string) string {
+	res, err := Lookup(fileData, targetHashHex)
+	if err != nil {
+		fmt.Println("Error:", err)
+		os.Exit(1)
+	}
+	if res.Found {
+		return fmt.Sprintf("%08x", res.ActivationBytes)
+	} else {
+		return ""
+	}
 }
