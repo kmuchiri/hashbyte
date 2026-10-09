@@ -35,11 +35,13 @@ Examples:
 `
 
 func printUsage() {
-	name := os.Args[0]
+	name := "hashbyte"
 	fmt.Printf(usage, name, name, name, name, name, name, name)
 }
 
 func main() {
+
+	name := "hashbyte"
 	if len(os.Args) < 2 {
 		printUsage()
 		os.Exit(1)
@@ -48,7 +50,7 @@ func main() {
 	switch os.Args[1] {
 	case "brute-force":
 		if len(os.Args) != 3 {
-			fmt.Printf("Usage: %s brute-force <sha1_hash>\n", os.Args[0])
+			fmt.Printf("Usage: %s brute-force <sha1_hash>\n", name)
 			os.Exit(1)
 		}
 		brute.Run(os.Args[2])
@@ -56,15 +58,15 @@ func main() {
 	case "rainbow":
 		if len(os.Args) < 3 {
 			fmt.Printf("Usage:\n")
-			fmt.Printf("  %s rainbow generate <output_file>\n", os.Args[0])
-			fmt.Printf("  %s rainbow lookup [-v|--verbose] [table_file] <sha1_hash>\n", os.Args[0])
+			fmt.Printf("  %s rainbow generate <output_file>\n", name)
+			fmt.Printf("  %s rainbow lookup [-v|--verbose] [table_file] <sha1_hash>\n", name)
 			os.Exit(1)
 		}
 
 		switch os.Args[2] {
 		case "generate":
 			if len(os.Args) != 4 {
-				fmt.Printf("Usage: %s rainbow generate <output_file>\n", os.Args[0])
+				fmt.Printf("Usage: %s rainbow generate <output_file>\n", name)
 				os.Exit(1)
 			}
 			rainbow.Generate(os.Args[3])
@@ -82,7 +84,7 @@ func main() {
 			}
 
 			if len(filteredArgs) < 1 || len(filteredArgs) > 2 {
-				fmt.Printf("Usage: %s rainbow lookup [-v|--verbose] [table_file] <sha1_hash>\n", os.Args[0])
+				fmt.Printf("Usage: %s rainbow lookup [-v|--verbose] [table_file] <sha1_hash>\n", name)
 				os.Exit(1)
 			}
 
