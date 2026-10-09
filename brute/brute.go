@@ -25,6 +25,25 @@ func Run(targetHashHex string) {
 	printResult(targetHashHex, match, found, elapsed)
 }
 
+func returnHex(match [4]byte) string {
+	return fmt.Sprintf("%02X%02X%02X%02X", match[0], match[1], match[2], match[3])
+}
+
+func GetBytesOnly(targetHashHex string) string {
+	targetHash, err := hex.DecodeString(targetHashHex)
+	if err != nil || len(targetHash) != sha1.Size {
+		fmt.Println("Error: Invalid SHA1 checksum provided. Must be 40 hex characters (20 bytes).")
+		os.Exit(1)
+	}
+
+	match, _, found := findHash(targetHash)
+	if found {
+		return returnHex(match)
+	} else {
+		return ""
+	}
+}
+
 func findHash(targetHash []byte) ([4]byte, time.Duration, bool) {
 	numWorkers := runtime.NumCPU()
 	fmt.Printf("Starting brute force with %d workers...\n", numWorkers)
@@ -106,8 +125,8 @@ func printResult(targetHashHex string, match [4]byte, found bool, elapsed time.D
 		fmt.Printf("-------------------------------------------------------\n")
 		fmt.Printf("result\n")
 		fmt.Printf("-------------------------------------------------------\n")
-		fmt.Printf("%s...                               hex:%02X%02X%02X%02X\n",
-			targetHashHex[:8], match[0], match[1], match[2], match[3])
+		fmt.Printf("%s...                               hex:%s\n",
+			targetHashHex[:8], ReturnHex(match))
 	} else {
 		fmt.Printf("\nNo match found.\n")
 	}
