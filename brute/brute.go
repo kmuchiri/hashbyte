@@ -27,7 +27,7 @@ func Run(targetHashHex string) {
 
 func findHash(targetHash []byte) ([4]byte, time.Duration, bool) {
 	numWorkers := runtime.NumCPU()
-	fmt.Printf("Starting pure Go brute force with %d workers...\n", numWorkers)
+	fmt.Printf("Starting brute force with %d workers...\n", numWorkers)
 	fmt.Printf("Target hash: %x\n", targetHash)
 
 	startTime := time.Now()

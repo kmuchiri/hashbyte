@@ -2,13 +2,13 @@ package hash
 
 import "crypto/sha1"
 
-// FixedKey is the 16-byte Audible magic key used in all hash derivations.
+// FixedKey is the 16-byte magic key used in all hash derivations.
 var FixedKey = []byte{
 	0x77, 0x21, 0x4d, 0x4b, 0x19, 0x6a, 0x87, 0xcd,
 	0x52, 0x00, 0x45, 0xfd, 0x20, 0xa5, 0x1d, 0x67,
 }
 
-// Computes the 3-pass Audible SHA-1 derivation for a 4-byte candidate.
+// Computes the 3-pass SHA-1 derivation for a 4-byte candidate.
 // It uses pre-allocated buffers buf1 (20 bytes), buf2 (40 bytes), buf3 (32 bytes)
 // to avoid heap allocations in hot loops.
 func Audible(candidate uint32, buf1, buf2, buf3 []byte) [20]byte {
