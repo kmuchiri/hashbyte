@@ -5,12 +5,23 @@ An Activation Byte Recovery Tool implemented in Go.
 ## Installation
 
 ### Method 1: Using the Install Script (Linux & macOS)
-You can quickly install the latest pre-compiled binary via our install script:
+You can quickly install the latest pre-compiled binary via install script:
 ```bash
 curl -sSL https://raw.githubusercontent.com/kmuchiri/hashbyte/main/scripts/install.sh | sudo bash
 ```
 
-### Method 2: Build from Source
+### Method 2: Using the Install Script (Windows)
+For Windows users, open PowerShell and run:
+```powershell
+Invoke-Expression (Invoke-RestMethod -Uri "https://raw.githubusercontent.com/kmuchiri/hashbyte/main/scripts/install.ps1")
+```
+*Or using the shorthand:*
+```powershell
+irm https://raw.githubusercontent.com/kmuchiri/hashbyte/main/scripts/install.ps1 | iex
+```
+This script downloads the binary, places it in your local AppData folder (`%LOCALAPPDATA%\hashbyte`), and automatically adds it to your system PATH.
+
+### Method 3: Build from Source
 Ensure you have [Go](https://go.dev/) installed.
 
 ```bash
@@ -62,3 +73,20 @@ You can build your own rainbow tables and save them to a binary file:
 ```bash
 hashbyte rainbow generate <output_file>
 ```
+
+## Uninstall
+
+Because `hashbyte` is a single standalone executable, uninstalling it is as simple as deleting the file.
+
+**Linux & macOS:**
+```bash
+sudo rm /usr/local/bin/hashbyte
+```
+
+**Windows:**
+Open PowerShell and remove the installation directory:
+```powershell
+Remove-Item -Recurse -Force $env:LOCALAPPDATA\hashbyte
+```
+*(You can also safely remove the folder from your system PATH via the Windows Environment Variables menu).*
+
