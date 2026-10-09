@@ -1,16 +1,12 @@
 package main
 
 import (
-	_ "embed"
 	"fmt"
 	"os"
 
 	"github.com/kmuchiri/hashbyte/brute"
 	"github.com/kmuchiri/hashbyte/rainbow"
 )
-
-//go:embed rainbow/tables.bin
-var embeddedTables []byte
 
 const usage = `Activation Byte Recovery Tool
 
@@ -93,7 +89,7 @@ func main() {
 
 			if len(filteredArgs) == 1 {
 				// Uses embedded tables
-				fileData = embeddedTables
+				fileData = rainbow.EmbeddedTables
 				hashArg = filteredArgs[0]
 				if verbose {
 					fmt.Println("Using embedded rainbow tables.")

@@ -132,17 +132,3 @@ func RunLookup(fileData []byte, targetHashHex string) {
 	}
 	HexOnly(res)
 }
-
-// RunLookupAndReturnHex runs the lookup and returns the activation bytes in hex format if found, otherwise returns an empty string.
-func RunLookupAndReturnHex(fileData []byte, targetHashHex string) string {
-	res, err := Lookup(fileData, targetHashHex)
-	if err != nil {
-		fmt.Println("Error:", err)
-		os.Exit(1)
-	}
-	if res.Found {
-		return fmt.Sprintf("%08x", res.ActivationBytes)
-	} else {
-		return ""
-	}
-}
