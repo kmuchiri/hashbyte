@@ -5,7 +5,7 @@ import (
 	"crypto/sha1"
 	"encoding/hex"
 	"fmt"
-	"hashbyte/hash"
+	"github.com/kmuchiri/hashbyte/hash"
 	"os"
 	"runtime"
 	"sync"
@@ -126,7 +126,7 @@ func printResult(targetHashHex string, match [4]byte, found bool, elapsed time.D
 		fmt.Printf("result\n")
 		fmt.Printf("-------------------------------------------------------\n")
 		fmt.Printf("%s...                               hex:%s\n",
-			targetHashHex[:8], ReturnHex(match))
+			targetHashHex[:8], returnHex(match))
 	} else {
 		fmt.Printf("\nNo match found.\n")
 	}

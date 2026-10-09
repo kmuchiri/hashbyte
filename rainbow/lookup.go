@@ -4,7 +4,7 @@ import (
 	"encoding/binary"
 	"encoding/hex"
 	"fmt"
-	"hashbyte/hash"
+	"github.com/kmuchiri/hashbyte/hash"
 	"os"
 	"sort"
 	"time"

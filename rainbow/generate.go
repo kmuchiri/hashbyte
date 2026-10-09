@@ -3,7 +3,7 @@ package rainbow
 import (
 	"encoding/binary"
 	"fmt"
-	"hashbyte/hash"
+	"github.com/kmuchiri/hashbyte/hash"
 	"math/rand"
 	"os"
 	"runtime"

@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"hashbyte/brute"
-	"hashbyte/rainbow"
+	"github.com/kmuchiri/hashbyte/brute"
+	"github.com/kmuchiri/hashbyte/rainbow"
 )
 
 //go:embed rainbow/tables.bin
